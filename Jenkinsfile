@@ -1,27 +1,19 @@
 pipeline {
-   ageny ageny
+    agent any
+    stages {
+        stage('STAGE1') {
+            steps {
+                sh 'sleep 4'
+                echo "This is STAGE1 of pipeline"
+            }
+        }
 
-   stage{
-    stage('STAGE1'){
-        steps{
-        sh 'sleep 10 '
+        stage('STAGE2') {
+            steps {
+                sh 'sleep 2'
+                echo "This is STAGE2 of pipeline"
+            }
         }
     }
-    stage{
-    stage('STAGE2'){
-        steps{
-            sh 'sleep 5'
-            echo "This is STAGE2 of pipeline"
-        }
-    }
-   }
-  
-    stage{
-    stage('STAGE3'){
-        steps{
-            sh 'sleep 2'
-            echo "This is STAGE3 of pipeline"
-        }
-    }
-   }
 }
+
