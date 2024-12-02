@@ -1,0 +1,19 @@
+pipeline{
+    agent any
+    stages{
+        stage('STAGE1'){
+            steps{
+             sh 'sleep 4'
+             echo "this is stage1 pipeline"
+            }
+        }
+        stage('STAGE2'){
+            steps{
+                sh 'ls lrt'
+                echo "This is stage2 of pipeline"
+            }
+
+        } 
+
+    }
+}

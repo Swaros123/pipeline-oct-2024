@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    environment {
+       Git_url = "https://github.com/jaintpharsha/oct-2024.git"
+       GIT_BRANCH  = "main"
+       GIT_CREDENTIALS = "github_jaintpharsha"
+    }
+    stages{
+        stage('CHECKOUT'){
+            steps{
+                script{
+                    GIT_BRANCH: "${environment.Git_url}"
+                    GIT_CREDENTIALS: "${environment.GIT_CREDENTIALS}"
+                    Git_url: "${environment.Git_url}"
+                }
+            }
+        }
+
+        stage('check'){
+            steps{
+                sh '''
+                  ls -lrt
+                  echo $Git_Branch
+                  env
+                '''
+            }
+
+        }
+
+    }
+
+
+}
