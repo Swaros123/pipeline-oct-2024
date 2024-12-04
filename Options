@@ -1,23 +1,26 @@
-pipeline{
+pipeline {
     agent any
 
     options {
-      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '')
-      disableConcurrentBuilds abortPrevious: true
-      timeout(time: 5, unit: 'SECONDS')
-      timestamps
+        ansiColor('xterm') // Enables ANSI color coding for console logs
+        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '')) 
+        // Discards old builds: keeps last 5 builds, removes older ones
+        disableConcurrentBuilds() // Prevents concurrent builds of the same pipeline
+        timeout(time: 5, unit: 'MINUTES') // Aborts the build if it exceeds 5 minutes
+        timestamps() // Adds timestamps to console output for better log tracking
     }
     
     triggers {
-        cron '*/2 * * * * '
-        pollSCM '* * * * *'
-      }
+        // cron '*/2 * * * *' // Uncomment to schedule the pipeline to run every 2 minutes
+        pollSCM('* * * * *') // Polls SCM every minute for changes
+    }
 
-    stages{
-        
-        stage('STAGE1'){
-            steps{
-                SH 'sleep 3'
+    stages {
+        stage('STAGE1') {
+            steps {
+                script {
+                    sh 'sleep 3' // Sleep for 3 seconds (a placeholder for actual shell commands)
+                }
             }
         }
     }
