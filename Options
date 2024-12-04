@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm') // Enables ANSI color coding for console logs
+        //ansiColor('xterm') // Enables ANSI color coding for console logs
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '')) 
         // Discards old builds: keeps last 5 builds, removes older ones
         disableConcurrentBuilds() // Prevents concurrent builds of the same pipeline
