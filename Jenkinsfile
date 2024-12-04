@@ -1,19 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage('STAGE1') {
+        stage('Clone Repository') {
             steps {
-                sh 'ls -lrt'
-                echo "This is STAGE1 of pipeline"
+                git branch: 'main', url: 'https://github.com/<your-username>/<repository-name>.git'
             }
         }
-
-        stage('STAGE2') {
+        stage('Build') {
             steps {
-                sh 'pwd'
-                echo "This is STAGE2 of pipeline"
+                echo 'Building the project...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
             }
         }
     }
 }
-
