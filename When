@@ -1,0 +1,40 @@
+pipeline{
+    agent any
+
+    stages{
+
+        stage('CHECKOUT'){
+            steps{
+                script{
+                    checkout scmGit(branches: [[name: 'main']],
+                                    userRemoteConfigs: [[credentialsId: 'Swaros123',
+                                                         url: 'https://github.com/Swaros123/pipeline-oct-2024']])
+                }
+            }
+        }
+
+        stage('STAGE1'){
+            when{
+                expression{
+                    env.GIT_BRANCH == 'origin/main'
+                }
+            }
+            steps{
+                echo "main branch"
+                sh 'sleep 4'
+            }
+        }
+        stage('STAGE2'){
+
+            steps{
+                echo "main branch"
+                sh 'sleep 4'
+            }
+        }
+    }
+    post{
+        always{
+            cleanWS()
+        }
+    }
+}

@@ -1,0 +1,17 @@
+pipeline{
+    agent any 
+
+    parameters {
+      booleanParam description: 'Deploy or Not', name: 'Run_Project'
+      string description: 'Target server to deploy', name: 'env_target'
+      choice choices: ['test','stagging','pre-prod''prod'], description: 'Choose an option to run the job', name: 'CHOOSE'
+    }
+
+    stages {
+        stage('STAGE1'){
+            echo "Boolean: ${params.Run_Project}"
+            echo "string: ${params.env_target}"
+            echo "CHOICE: ${params.CHOOSE}"
+        }
+    }
+}

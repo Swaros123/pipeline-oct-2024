@@ -1,0 +1,24 @@
+pipeline{
+    agent any
+
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '')
+      disableConcurrentBuilds abortPrevious: true
+      timeout(time: 5, unit: 'SECONDS')
+      timestamps
+    }
+    
+    triggers {
+        cron '*/2 * * * * '
+        pollSCM '* * * * *'
+      }
+
+    stages{
+        
+        stage('STAGE1'){
+            steps{
+                SH 'sleep 3'
+            }
+        }
+    }
+}
