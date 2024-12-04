@@ -1,9 +1,9 @@
 pipeline{
     agent any
     environment {
-       Git_url = "https://github.com/jaintpharsha/oct-2024.git"
+       Git_url = "https://github.com/Swaros123/pipeline-oct-2024.git"
        GIT_BRANCH  = "main"
-       GIT_CREDENTIALS = "github_jaintpharsha"
+       GIT_CREDENTIALS = "Swaros123"
     }
     stages{
         stage('CHECKOUT'){
