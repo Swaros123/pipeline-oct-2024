@@ -1,33 +1,33 @@
-pipeline{
+pipeline {
     agent any
     environment {
-       Git_url = "https://github.com/Swaros123/pipeline-oct-2024.git"
-       GIT_BRANCH  = "main"
-       GIT_CREDENTIALS = "Swaros123"
+        Git_url = "https://github.com/Swaros123/pipeline-oct-2024.git"
+        GIT_BRANCH = "main"
+        GIT_CREDENTIALS = "Swaros123"
     }
-    stages{
-        stage('CHECKOUT'){
-            steps{
-                script{
-                    GIT_BRANCH: "${environment.Git_url}"
-                    GIT_CREDENTIALS: "${environment.GIT_CREDENTIALS}"
-                    Git_url: "${environment.Git_url}"
+    stages {
+        stage('CHECKOUT') {
+            steps {
+                script {
+                    // Correctly referencing environment variables
+                    echo "Git URL: ${env.Git_url}"
+                    echo "Git Branch: ${env.GIT_BRANCH}"
+                    echo "Git Credentials: ${env.GIT_CREDENTIALS}"
+                    
+                    // Checkout command if you want to actually pull the repo
+                    checkout([$class: 'GitSCM', branches: [[name: "*/${env.GIT_BRANCH}"]], userRemoteConfigs: [[url: env.Git_url, credentialsId: env.GIT_CREDENTIALS]]])
                 }
             }
         }
 
-        stage('check'){
-            steps{
+        stage('check') {
+            steps {
                 sh '''
-                  ls -lrt
-                  echo $Git_Branch
-                  env
+                    ls -lrt
+                    echo "Git Branch: ${GIT_BRANCH}"
+                    env
                 '''
             }
-
         }
-
     }
-
-
 }
